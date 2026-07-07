@@ -78,7 +78,7 @@ export default function PricingSection({ subscriptionTier = "free" }) {
               Head Chef
             </CardTitle>
             <div className="text-5xl font-bold text-orange-600">
-              $7.99
+              $3.99
               <span className="text-lg font-normal text-orange-400">/mo</span>
             </div>
             <CardDescription className="text-orange-800/70 font-light text-base">
