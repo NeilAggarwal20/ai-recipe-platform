@@ -32,6 +32,13 @@ export const checkUser = async () => {
         cache: "no-store",
       }
     );
+    console.log("Status:", existingUserResponse.status);
+    console.log("Status Text:", existingUserResponse.statusText);
+
+    if (!existingUserResponse.ok) {
+        const text = await existingUserResponse.text();
+        console.log("Response:", text);
+    }
 
     if (!existingUserResponse.ok) {
       const errorText = await existingUserResponse.text();
