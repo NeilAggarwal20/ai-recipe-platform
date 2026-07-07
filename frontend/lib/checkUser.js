@@ -36,14 +36,10 @@ export const checkUser = async () => {
     console.log("Status Text:", existingUserResponse.statusText);
 
     if (!existingUserResponse.ok) {
-        const text = await existingUserResponse.text();
-        console.log("Response:", text);
-    }
-
-    if (!existingUserResponse.ok) {
-      const errorText = await existingUserResponse.text();
-      console.error("Strapi error response:", errorText);
-      return null;
+        const errorText = await existingUserResponse.text();
+        console.error("Status:", existingUserResponse.status);
+        console.error("Response:", errorText);
+        return null;
     }
 
     const existingUserData = await existingUserResponse.json();
@@ -78,8 +74,10 @@ export const checkUser = async () => {
 
     const rolesData = await rolesResponse.json();
     const authenticatedRole = rolesData.roles.find(
-      (role) => role.type === "authenticated"
+    (role) => role.type === "authenticated"
     );
+    console.log("Roles Data:", rolesData);
+    console.log("Authenticated Role:", authenticatedRole);
 
     if (!authenticatedRole) {
       console.error("❌ Authenticated role not found");
@@ -101,8 +99,10 @@ export const checkUser = async () => {
       imageUrl: user.imageUrl || "",
       subscriptionTier,
     };
+    console.log("User Data:", userData);
 
     const newUserResponse = await fetch(`${STRAPI_URL}/api/users`, {
+        
       method: "POST",
       headers: {
         "Content-Type": "application/json",
