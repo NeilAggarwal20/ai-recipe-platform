@@ -1,9 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/Header";
-import { neobrutalism } from "@clerk/themes";
+
 import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -15,11 +15,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: neobrutalism,
-      }}
-    >
+<ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <head>
           <link rel="icon" href="/logo.png" sizes="any" />
@@ -42,7 +38,7 @@ export default function RootLayout({ children }) {
                 />
               </div>
               <p className="text-stone-500 text-sm">
-                Made with 💗 by RoadsideCoder
+                Made with 💗 by Neil Aggarwal
               </p>
             </div>
           </footer>

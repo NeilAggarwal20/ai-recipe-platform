@@ -33,9 +33,9 @@ export const freeMealRecommendations = aj.withRule(
   tokenBucket({
     mode: "LIVE",
     characteristics: ["userId"],
-    refillRate: 5,
-    interval: "30d",
-    capacity: 5,
+    refillRate: 1000,
+    interval: "1d",
+    capacity: 1000,
   })
 );
 

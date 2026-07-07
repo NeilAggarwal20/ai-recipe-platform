@@ -167,13 +167,11 @@ export default async function DashboardPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {areas.map((area) => (
-              <Link
-                key={area.strArea}
-                href={`/recipes/cuisine/${area.strArea
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-              >
+            {areas.map((area, index) => (
+            <Link
+                key={`${area.strArea}-${index}`}
+                href={`/recipes/cuisine/${area.strArea.toLowerCase()}`}
+            >
                 <div className="bg-stone-50 p-5 border-2 border-stone-200 hover:border-orange-600 hover:shadow-lg transition-all group cursor-pointer">
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">
