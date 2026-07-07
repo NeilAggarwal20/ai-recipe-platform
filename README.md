@@ -1,4 +1,52 @@
-# Full Stack AI Recipe Platform with Next JS, Neon DB, Tailwind, Strapi, Arcjet, Shadcn UI Tutorial 🔥🔥
-## https://www.youtube.com/watch?v=zZ85cFWgNhI
+# 🍳 AI Recipe Platform
 
-<img width="1280" height="720" alt="servd" src="https://github.com/user-attachments/assets/b030b01c-55a0-4a92-9492-8f72ed57b8bc" />
+An AI-powered recipe generation platform that helps users create delicious recipes from available pantry ingredients using Google Gemini AI.
+
+## ✨ Features
+
+- 🔐 Clerk Authentication
+- 🤖 AI Recipe Generation (Google Gemini)
+- 🥗 Pantry Management
+- 📄 PDF Recipe Export
+- 🛡️ Arcjet Security
+- 🌙 Responsive UI
+- ⚡ Next.js 16
+- 🎨 Tailwind CSS
+- 🗄️ Strapi CMS
+
+## 🛠️ Tech Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- Clerk
+- Strapi
+- Google Gemini AI
+- Arcjet
+
+## 🚀 Installation
+
+```bash
+git clone <repo-url>
+cd ai-recipe-platform
+```
+
+Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Backend
+
+```bash
+cd backend
+npm install
+npm run develop
+```
+
+## 👨‍💻 Author
+
+Neil Aggarwal
