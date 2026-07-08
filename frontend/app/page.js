@@ -144,28 +144,42 @@ export default async function LandingPage() {
             {FEATURES.map((feature, index) => {
               const IconComponent = feature.icon;
               return (
-                <Card
-                  key={index}
-                  className="border-2 border-stone-200 bg-white hover:border-orange-600 hover:shadow-lg transition-all group py-0"
-                >
-                  <CardContent className="p-8">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="border-2 border-stone-200 bg-orange-50 p-3 group-hover:border-orange-600 group-hover:bg-orange-100 transition-colors">
-                        <IconComponent className="w-6 h-6" />
-                      </div>
-                      <Badge
-                        variant="secondary"
-                        className="text-xs font-mono bg-stone-100 text-stone-600 uppercase tracking-wide border border-stone-200"
-                      >
-                        {feature.limit}
-                      </Badge>
+                <Link
+                key={index}
+                href={feature.link}>
+            <Card
+                className="group h-full cursor-pointer border-2 border-stone-200 bg-white py-0 transition-all duration-300 hover:-translate-y-1 hover:border-orange-600 hover:shadow-xl"
+            >
+                <CardContent className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                    <div className="border-2 border-stone-200 bg-orange-50 p-3 transition-all group-hover:scale-110 group-hover:border-orange-600 group-hover:bg-orange-100">
+                    <IconComponent className="w-6 h-6" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
-                    <p className="text-stone-600 text-lg font-light">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
+
+                    <Badge
+                    variant="secondary"
+                    className="text-xs font-mono uppercase tracking-wide border border-orange-200 bg-orange-50 text-orange-700"
+                    >
+                    {feature.limit}
+                    </Badge>
+                </div>
+
+                <h3 className="mb-3 flex items-center gap-2 text-2xl font-bold group-hover:text-orange-600">
+                    {feature.title}
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </h3>
+
+                <p className="mb-6 text-lg font-light text-stone-600">
+                    {feature.description}
+                </p>
+
+                <div className="flex items-center font-semibold text-orange-600">
+                    {feature.cta}
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </div>
+                </CardContent>
+            </Card>
+            </Link>
               );
             })}
           </div>

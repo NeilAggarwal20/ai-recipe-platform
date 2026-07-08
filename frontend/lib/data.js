@@ -14,6 +14,8 @@ export const FEATURES = [
       "Photo recognition that actually works. Know what you have instantly.",
     icon: Camera,
     limit: "10 scans/mo free",
+    link: "/pantry",
+    cta: "Start Scanning",
   },
   {
     title: "AI Chef Suggestions",
@@ -21,6 +23,8 @@ export const FEATURES = [
       "Turn random ingredients into a gourmet meal. Zero food waste.",
     icon: ChefHat,
     limit: "5 meals/mo free",
+    link: "/recipe",
+    cta: "Generate Recipe",
   },
   {
     title: "Search Any Dish",
@@ -28,12 +32,16 @@ export const FEATURES = [
       "Find any recipe instantly. Filter by cuisine, time, or dietary needs.",
     icon: Search,
     limit: "Unlimited searches",
+    link: "/recipes",
+    cta: "Search Recipes",
   },
   {
     title: "Digital Cookbook",
     description: "Save your favorites. Export as PDF. Share with family.",
     icon: BookOpen,
     limit: "3 saves/mo free",
+    link: "/saved-recipes",
+    cta: "Open Cookbook",
   },
 ];
 
