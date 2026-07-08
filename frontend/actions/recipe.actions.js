@@ -67,6 +67,27 @@ async function fetchRecipeImage(recipeName) {
 export async function getOrGenerateRecipe(formData) {
   try {
     const user = await checkUser();
+    const isPro = user.subscriptionTier === "pro";
+    const arcjetClient = isPro ? proTierLimit : freeMealRecommendations;
+
+    const req = await request();
+
+    const decision = await arcjetClient.protect(req, {
+    userId: user.clerkId,
+    requested: 1,
+    });
+
+    if (decision.isDenied()) {
+    if (decision.reason.isRateLimit()) {
+        throw new Error(
+        isPro
+            ? "Daily AI recipe limit reached."
+            : "Daily AI recipe limit reached. Upgrade to Pro!"
+        );
+    }
+
+    throw new Error("Request denied.");
+    }
     if (!user) {
       throw new Error("User not authenticated");
     }
@@ -93,7 +114,7 @@ export async function getOrGenerateRecipe(formData) {
     const normalizedTitle = normalizeTitle(recipeName);
     console.log("🔍 Searching for recipe:", normalizedTitle);
 
-    const isPro = user.subscriptionTier === "pro";
+    
 
     // Step 1: Check if recipe already exists in DB (case-insensitive search)
     const searchResponse = await fetch(

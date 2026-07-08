@@ -33,9 +33,9 @@ export const freeMealRecommendations = aj.withRule(
   tokenBucket({
     mode: "LIVE",
     characteristics: ["userId"],
-    refillRate: 1000,
+    refillRate: 100,
     interval: "1d",
-    capacity: 1000,
+    capacity: 100,
   })
 );
 
@@ -45,8 +45,8 @@ export const proTierLimit = aj.withRule(
   tokenBucket({
     mode: "LIVE",
     characteristics: ["userId"],
-    refillRate: 1000,
+    refillRate: 5,
     interval: "1d",
-    capacity: 1000,
+    capacity: 5,
   })
 );
