@@ -64,12 +64,16 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
   };
 
   // Update scanned ingredients when scan completes
-  useEffect(() => {
-    if (scanData?.success && scanData?.ingredients) {
-      setScannedIngredients(scanData.ingredients);
-      toast.success(`Found ${scanData.ingredients.length} ingredients!`);
+    useEffect(() => {
+    if (!scanData) return;
+
+    if (scanData.success) {
+        setScannedIngredients(scanData.ingredients);
+        toast.success(`Found ${scanData.ingredients.length} ingredients!`);
+    } else {
+        toast.error(scanData.error);
     }
-  }, [scanData]);
+    }, [scanData]);
 
   // Handle save scanned items
   const handleSaveScanned = async () => {

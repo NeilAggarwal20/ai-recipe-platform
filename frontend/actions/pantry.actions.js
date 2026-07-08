@@ -79,6 +79,15 @@ Rules:
 - Confidence should be 0.7-1.0 (omit items below 0.7)
 - Maximum 20 items
 - Common pantry staples are acceptable (salt, pepper, oil)
+    If the image does not contain food, ingredients, groceries, or pantry items,
+    return exactly:
+
+    []
+
+    Do not explain anything.
+    Do not write markdown.
+    Do not write any sentence.
+    Return only the JSON array.
 `;
 
     const result = await model.generateContent([
@@ -103,14 +112,21 @@ Rules:
         .trim();
       ingredients = JSON.parse(cleanText);
     } catch (parseError) {
-      console.error("Failed to parse Gemini response:", text);
-      throw new Error("Failed to parse ingredients. Please try again.");
+        console.error("Failed to parse Gemini response:", text);
+
+        return {
+            success: false,
+            error:
+            "Couldn't detect any food items. Please upload a clear image of a meal or ingredients.",
+        };
     }
 
     if (!Array.isArray(ingredients) || ingredients.length === 0) {
-      throw new Error(
-        "No ingredients detected in the image. Please try a clearer photo."
-      );
+    return {
+    success: false,
+    error:
+        "Couldn't detect any food items. Please upload a clear image of a meal or ingredients.",
+    };
     }
 
     return {
@@ -119,10 +135,16 @@ Rules:
       scansLimit: isPro ? "unlimited" : 10,
       message: `Found ${ingredients.length} ingredients!`,
     };
-  } catch (error) {
+    } catch (error) {
     console.error("Error scanning pantry:", error);
-    throw new Error(error.message || "Failed to scan image");
-  }
+
+    return {
+        success: false,
+        error:
+        error.message ||
+        "Something went wrong while scanning the image. Please try again.",
+    };
+    }
 }
 
 // Save ingredients to pantry
