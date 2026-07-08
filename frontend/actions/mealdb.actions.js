@@ -58,9 +58,34 @@ export async function getAreas() {
     }
 
     const data = await response.json();
+        const allowedAreas = [
+    "American",
+    "British",
+    "Canadian",
+    "Chinese",
+    "French",
+    "Greek",
+    "Indian",
+    "Irish",
+    "Italian",
+    "Japanese",
+    "Malaysian",
+    "Mexican",
+    "Moroccan",
+    "Polish",
+    "Portuguese",
+    "Russian",
+    "Spanish",
+    "Thai",
+    "Turkish",
+    "Vietnamese",
+    ];
+    const filteredAreas = (data.meals || []).filter((area) =>
+        allowedAreas.includes(area.strArea)
+        );
     return {
       success: true,
-      areas: data.meals || [],
+      areas: filteredAreas,
     };
   } catch (error) {
     console.error("Error fetching areas:", error);
