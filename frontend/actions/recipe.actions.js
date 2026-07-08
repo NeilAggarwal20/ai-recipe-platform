@@ -71,9 +71,22 @@ export async function getOrGenerateRecipe(formData) {
       throw new Error("User not authenticated");
     }
 
-    const recipeName = formData.get("recipeName");
+    const recipeName = formData.get("recipeName")?.trim();
+
     if (!recipeName) {
-      throw new Error("Recipe name is required");
+    throw new Error("Recipe name is required");
+    }
+
+    // Length validation
+    if (recipeName.length < 3 || recipeName.length > 50) {
+    throw new Error("Recipe name must be between 3 and 50 characters.");
+    }
+
+    // Allow only letters, numbers, spaces, hyphens and apostrophes
+    const recipeRegex = /^[a-zA-Z0-9\s'-]+$/;
+
+    if (!recipeRegex.test(recipeName)) {
+    throw new Error("Recipe name contains invalid characters.");
     }
 
     // Normalize the title (e.g., "apple cake" → "Apple Cake")
@@ -339,7 +352,7 @@ Guidelines:
             tips: [],
             substitutions: [],
     };
-    
+
     return {
     success: true,
     recipe: safeRecipe,
