@@ -117,15 +117,23 @@ export async function getOrGenerateRecipe(formData) {
           const savedData = await savedRecipeResponse.json();
           isSaved = savedData.data && savedData.data.length > 0;
         }
+        const recipe = isPro
+        ? searchData.data[0]
+        : {
+            ...searchData.data[0],
+            nutrition: null,
+            tips: [],
+            substitutions: [],
+            };
 
         return {
-          success: true,
-          recipe: searchData.data[0],
-          recipeId: searchData.data[0].id,
-          isSaved: isSaved,
-          fromDatabase: true,
-          isPro,
-          message: "Recipe loaded from database",
+            success: true,
+            recipe,
+            recipeId: recipe.id,
+            isSaved,
+            fromDatabase: true,
+            isPro,
+            message: "Recipe loaded from database",
         };
       }
     }
@@ -315,21 +323,32 @@ Guidelines:
     const createdRecipe = await createRecipeResponse.json();
     console.log("✅ Recipe saved to database:", createdRecipe.data.id);
 
-    return {
-      success: true,
-      recipe: {
+    const generatedRecipe = {
         ...recipeData,
         title: normalizedTitle,
         category,
         cuisine,
         imageUrl: imageUrl || "",
-      },
-      recipeId: createdRecipe.data.id,
-      isSaved: false,
-      fromDatabase: false,
-      recommendationsLimit: isPro ? "unlimited" : 5,
-      isPro,
-      message: "Recipe generated and saved successfully!",
+        };
+
+        const safeRecipe = isPro
+        ? generatedRecipe
+        : {
+            ...generatedRecipe,
+            nutrition: null,
+            tips: [],
+            substitutions: [],
+    };
+    
+    return {
+    success: true,
+    recipe: safeRecipe,
+    recipeId: createdRecipe.data.id,
+    isSaved: false,
+    fromDatabase: false,
+    recommendationsLimit: isPro ? "unlimited" : 5,
+    isPro,
+    message: "Recipe generated and saved successfully!",
     };
   } catch (error) {
     console.error("❌ Error in getOrGenerateRecipe:", error);
