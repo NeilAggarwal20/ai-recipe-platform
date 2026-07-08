@@ -138,6 +138,21 @@ Rules:
     } catch (error) {
     console.error("Error scanning pantry:", error);
 
+    const message = error?.message?.toLowerCase() || "";
+
+    if (
+        message.includes("429") ||
+        message.includes("quota") ||
+        message.includes("rate limit") ||
+        message.includes("resource has been exhausted")
+    ) {
+        return {
+        success: false,
+        error:
+            "🚫 AI service is temporarily busy. Please try again in a few minutes.",
+        };
+    }
+
     return {
         success: false,
         error:
