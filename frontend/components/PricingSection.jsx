@@ -109,7 +109,7 @@ export default function PricingSection({ subscriptionTier = "free" }) {
           <CardFooter>
             <SignedIn>
               <CheckoutButton
-                planId="cplan_3GBhxYjHXZBu47QmFVXWgOj9FuB"
+                planId={process.env.NEXT_PUBLIC_CLERK_PRO_PLAN_ID}
                 planPeriod="month"
                 newSubscriptionRedirectUrl="/dashboard"
                 checkoutProps={{

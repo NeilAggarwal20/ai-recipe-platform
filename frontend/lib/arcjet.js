@@ -28,25 +28,25 @@ export const freePantryScans = aj.withRule(
   })
 );
 
-// Free tier meal recommendations (5 per month)
+// Free tier meal recommendations (5 per day)
 export const freeMealRecommendations = aj.withRule(
-  tokenBucket({
-    mode: "LIVE",
-    characteristics: ["userId"],
-    refillRate: 100,
-    interval: "1d",
-    capacity: 100,
-  })
-);
-
-// Pro tier - effectively unlimited (very high limits)
-// 1000 requests per day should be more than enough for any user
-export const proTierLimit = aj.withRule(
   tokenBucket({
     mode: "LIVE",
     characteristics: ["userId"],
     refillRate: 5,
     interval: "1d",
     capacity: 5,
+  })
+);
+
+// Pro tier - effectively unlimited (very high limits)
+// 100 requests per day should be more than enough for any user
+export const proTierLimit = aj.withRule(
+  tokenBucket({
+    mode: "LIVE",
+    characteristics: ["userId"],
+    refillRate: 100,
+    interval: "1d",
+    capacity: 100,
   })
 );
